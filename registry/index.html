@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agora Registry — Discover Agent Sites</title>
+<meta name="description" content="Public registry of open agentic sites in the Agora market: identifier, manifest URL, and capabilities.">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <h1>Agora Registry <span class="tag">Discovery</span></h1>
+  <p class="lede">A public list of open agentic sites any agent can discover and call.
+  Each entry points at the site's <code>agent-manifest.json</code> — fetch it,
+  pick a network, and run it locally in your browser.</p>
+</header>
+
+<main>
+  <section aria-label="Registry entries">
+    <h2>Registered sites</h2>
+    <div id="registry-list"><p>Loading…</p></div>
+    <p class="small">Raw data: <a href="../registry.json">registry.json</a></p>
+  </section>
+
+  <section aria-label="Add your shop">
+    <h2>Add your shop</h2>
+    <ol class="small">
+      <li>Copy the <a href="../shops/template/">shop template</a> and publish it on your own static site (GitHub Pages works).</li>
+      <li>Fill in your catalog, prices, and delivery details in the template's network file.</li>
+      <li>Make sure <code>agent-manifest.json</code> is reachable at your site root.</li>
+      <li>Open a pull request on the Agora repo adding one entry to <code>registry.json</code> (name, manifest URL, capabilities).</li>
+    </ol>
+    <p class="small">No account, fee, or approval is needed to publish your own
+    storefront — the registry is only a discovery list. Your shop works with
+    or without being listed here.</p>
+    <p><a href="../">Back to Agora Market</a></p>
+  </section>
+</main>
+
+<script>
+fetch("../registry.json")
+  .then((res) => (res.ok ? res.json() : Promise.reject(new Error("HTTP " + res.status))))
+  .then((data) => {
+    const list = document.getElementById("registry-list");
+    list.innerHTML = "";
+    for (const entry of data.entries || []) {
+      const card = document.createElement("article");
+      card.className = "product";
+      const name = document.createElement("h3");
+      name.textContent = entry.name;
+      const desc = document.createElement("p");
+      desc.className = "desc";
+      desc.textContent = entry.description || "";
+      const caps = document.createElement("p");
+      caps.className = "meta";
+      caps.textContent = "Capabilities: " + (entry.capabilities || []).join(", ");
+      const link = document.createElement("p");
+      const a = document.createElement("a");
+      a.href = entry.manifest_url;
+      a.textContent = "agent-manifest.json";
+      link.appendChild(a);
+      card.append(name, desc, caps, link);
+      list.appendChild(card);
+    }
+    if (!list.children.length) list.innerHTML = "<p>No sites registered yet.</p>";
+  })
+  .catch((err) => {
+    document.getElementById("registry-list").innerHTML =
+      "<p>Could not load the registry: " + err.message + "</p>";
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Agora Courier — Delivery Peer Site</title>
+<meta name="description" content="Courier peer site for the Agora market: publishes a delivery network that other agent sites can load and run locally in the visitor's browser.">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+<header>
+  <h1>Agora Courier <span class="tag">Peer site</span></h1>
+  <p class="lede">The delivery peer for the <a href="../">Agora market</a>. This site
+  publishes its own agent network; other agent sites load it by URL, match the
+  network by exact name, and run it locally in the visitor's browser — this
+  site never receives the visitor's API key.</p>
+  <p class="demo-note">Demo data: flat delivery fee and static time slots. No real
+  delivery is performed and no payment is taken.</p>
+</header>
+
+<main>
+  <section aria-label="Delivery quote">
+    <h2>Get a delivery quote</h2>
+    <form id="quote-form">
+      <label>Delivery address
+        <input id="quote-address" type="text" autocomplete="off" value="home">
+      </label>
+      <label>Day
+        <select id="quote-day">
+          <option>Saturday</option>
+          <option>Sunday</option>
+          <option>Monday</option>
+          <option>Tuesday</option>
+          <option>Wednesday</option>
+          <option>Thursday</option>
+          <option>Friday</option>
+        </select>
+      </label>
+      <button type="submit">Get quote</button>
+    </form>
+    <p id="quote-result" class="small">Fill in the form to see the dispatcher quote.</p>
+
+    <h3>Published delivery table</h3>
+    <p id="delivery-table" class="small">Loading…</p>
+
+    <h3>Execution trace</h3>
+    <div id="trace-log" class="log trace"></div>
+  </section>
+
+  <section aria-label="About this peer site">
+    <h2>How to call this site</h2>
+    <p class="small">Any open agentic website can use this courier as a peer:</p>
+    <ol class="small">
+      <li>Fetch <a href="./agent-manifest.json">agent-manifest.json</a> from this site's base URL.</li>
+      <li>Pick the network whose name exactly matches the last path component of the URL (<code>courier</code>).</li>
+      <li>Fetch <a href="./courier.network.json">courier.network.json</a>, validate it, and run it locally in the caller's browser with the caller's router.</li>
+      <li>Ask the user for consent before contacting this origin.</li>
+    </ol>
+    <ul class="small">
+      <li><a href="./agent-manifest.json">agent-manifest.json</a></li>
+      <li><a href="./courier.network.json">courier.network.json</a></li>
+      <li><a href="./links.json">links.json</a></li>
+      <li><a href="./.well-known/agent-card.json">.well-known/agent-card.json</a></li>
+      <li><a href="../">Back to Agora Market</a></li>
+    </ul>
+    <p class="small">Built for the Open Agentic Web Challenge 2026 (MVP Spec 0.3).
+    Open source under the Apache License 2.0.</p>
+  </section>
+</main>
+
+<script type="module" src="./app.js"></script>
+</body>
+</html>

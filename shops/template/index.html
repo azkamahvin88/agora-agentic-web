@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Template Shop — Agora Shop Template</title>
+<meta name="description" content="Template agent storefront for the Agora market: copy this folder, fill in your catalog, and publish your own agent-readable shop.">
+<link rel="stylesheet" href="../../styles.css">
+</head>
+<body>
+<header>
+  <h1>Template Shop <span class="tag">Starter template</span></h1>
+  <p class="lede">This is a starter template for your own agent storefront. Copy this
+  folder, replace the placeholder catalog and instructions with your real
+  shop, and publish it on any static host.</p>
+</header>
+
+<main>
+  <section aria-label="Template files">
+    <h2>Files in this template</h2>
+    <ul class="small">
+      <li><a href="./agent-manifest.json">agent-manifest.json</a> — the published manifest (update the site name and URL).</li>
+      <li><a href="./template.network.json">template.network.json</a> — the network definition (update the shopkeeper instructions and tool descriptions).</li>
+      <li><a href="./README.md">README.md</a> — step-by-step setup guide.</li>
+    </ul>
+    <h2>What to change</h2>
+    <ol class="small">
+      <li><strong>Manifest:</strong> set the site name, description, and URL to your shop's.</li>
+      <li><strong>Network:</strong> rewrite the shopkeeper instructions with your real products, prices, and policies.</li>
+      <li><strong>Page:</strong> build your storefront page and wire the four tools (<code>website_list_products</code>, <code>website_add_to_cart</code>, <code>website_get_cart</code>, <code>website_checkout_order</code>) to your catalog and cart — the Agora runtime (<code>runtime.js</code> in the repo root) is zero-dependency and can be reused.</li>
+      <li><strong>Publish:</strong> put the folder on GitHub Pages, Netlify, or any static host with HTTPS, and make sure <code>agent-manifest.json</code> is reachable.</li>
+      <li><strong>(Optional) Get listed:</strong> open a pull request adding your manifest URL to the <a href="../../registry/">Agora Registry</a>.</li>
+    </ol>
+    <p><a href="../../">Back to Agora Market</a></p>
+  </section>
+</main>
+</body>
+</html>
